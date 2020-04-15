@@ -1,0 +1,516 @@
+&tao_start
+		!building_wall_file = '../../Bypass/building_wall.init'
+		startup_file = '../../Bypass/bypass.tao'
+		plot_file = 'floor_plan.init'
+/
+
+&tao_design_lattice
+		n_universes = 1
+		design_lattice(1)%file = "lambda_minus.bmad"
+/
+
+! CONSTRAINTS TO ARC END
+
+&tao_d2_data
+  d2_data%name = 'lat_corr'
+  n_d1_data = 5
+/
+
+&tao_d1_data
+  ix_d1_data = 1
+  d1_data%name = 'dispersion_x'
+  datum(1) =  'eta.a'    '' '' 'END'   'target'     0  1e1
+  datum(2) =  'etap.a'    '' '' 'END'   'target'     0  1e1
+/
+
+&tao_d1_data
+  ix_d1_data = 2
+  d1_data%name = 'beta_end'
+  datum(1) =  'beta.a'    '' '' 'END'   'target'     8.138  1e1
+  datum(2) =  'beta.b'    '' '' 'END'   'target'     8.104  1e1
+/
+
+&tao_d1_data
+  ix_d1_data = 3
+  d1_data%name = 'alpha_end'
+  datum(1) =  'alpha.a'    '' '' 'END'   'target'     0.184  1e1
+  datum(2) =  'alpha.b'    '' '' 'END'   'target'    -0.104  1e1
+/
+
+&tao_d1_data
+  ix_d1_data = 4
+  d1_data%name = 'beta_end'
+  datum(1) =  'beta.a'    '' 'MSTQUA01' 'END'   'max'     100  1e1
+  datum(2) =  'beta.b'    '' 'MSTQUA01' 'END'   'max'     100  1e1
+/
+
+&tao_d1_data
+  ix_d1_data = 5
+  d1_data%name = 'r56'
+  datum(1) =  'r.56'     '' '' 'END'   'target'     0     1e1  
+/
+
+! CHICANE DIPOLES not yet successfully tested in r56_test
+
+! &tao_var
+	! v1_var%name = 'GFC'
+	! search_for_lat_eles = 'GFC'
+	! default_step = 1e-4
+	! default_attribute = 'ang'
+	! default_merit_type = 'limit'
+	! default_low_lim = -1.5
+	! default_high_lim = 1.5
+	! default_weight = 1
+  ! ix_min_var = 1
+  ! default_key_delta = 1e-2
+  ! default_key_bound = T
+! /
+
+!R4 VARIABLES
+
+&tao_var
+	v1_var%name = 'MR4QUA05'
+	search_for_lat_eles = 'MR4QUA05'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MR4QUA04'
+	search_for_lat_eles = 'MR4QUA04'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MR4QUA03'
+	search_for_lat_eles = 'MR4QUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MR4QUA02'
+	search_for_lat_eles = 'MR4QUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MR4QUA01'
+	search_for_lat_eles = 'MR4QUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! ! DOGLEG VARIABLES
+
+&tao_var
+	v1_var%name = 'MDVQUA01'
+	search_for_lat_eles = 'MDVQUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MDVQUA02'
+	search_for_lat_eles = 'MDVQUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! &tao_var
+	! v1_var%name = 'MDVQUA03'
+	! search_for_lat_eles = 'MDVQUA03'
+	! default_step = 1e-4
+	! default_attribute = 'b1_gradient'
+	! default_merit_type = 'limit'
+	! default_low_lim = -15
+	! default_high_lim = 15
+	! default_weight = 1
+  ! ix_min_var = 1
+  ! default_key_delta = 1e-2
+  ! default_key_bound = T
+! /
+
+! &tao_var
+	! v1_var%name = 'MDVQUA04'
+	! search_for_lat_eles = 'MDVQUA04'
+	! default_step = 1e-4
+	! default_attribute = 'b1_gradient'
+	! default_merit_type = 'limit'
+	! default_low_lim = -15
+	! default_high_lim = 15
+	! default_weight = 1
+  ! ix_min_var = 1
+  ! default_key_delta = 1e-2
+  ! default_key_bound = T
+! /
+
+! &tao_var
+	! v1_var%name = 'MDVQUA05'
+	! search_for_lat_eles = 'MDVQUA05'
+	! default_step = 1e-4
+	! default_attribute = 'b1_gradient'
+	! default_merit_type = 'limit'
+	! default_low_lim = -15
+	! default_high_lim = 15
+	! default_weight = 1
+  ! ix_min_var = 1
+  ! default_key_delta = 1e-2
+  ! default_key_bound = T
+! /
+
+&tao_var
+	v1_var%name = 'MDVQUA06'
+	search_for_lat_eles = 'MDVQUA06'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MDVQUA07'
+	search_for_lat_eles = 'MDVQUA07'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! ! ARC VARIABLES 
+
+&tao_var
+	v1_var%name = 'MLHQUA01'
+	search_for_lat_eles = 'MLHQUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MLHQUA02'
+	search_for_lat_eles = 'MLHQUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MLHQUA03'
+	search_for_lat_eles = 'MLHQUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MLHQUA04'
+	search_for_lat_eles = 'MLHQUA04'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MLHQUA05'
+	search_for_lat_eles = 'MLHQUA05'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MLHQUA06'
+	search_for_lat_eles = 'MLHQUA06'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! ! STRAIGHT VARIABLES
+
+&tao_var
+	v1_var%name = 'MSTQUA01'
+	search_for_lat_eles = 'MSTQUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MSTQUA02'
+	search_for_lat_eles = 'MSTQUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MSTQUA03'
+	search_for_lat_eles = 'MSTQUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! ! PATH LENGTH CHICANE VARIABLES
+
+! ! Arm 1 Quads
+&tao_var
+	v1_var%name = 'MA1QUA01'
+	search_for_lat_eles = 'MA1QUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MA1QUA02'
+	search_for_lat_eles = 'MA1QUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MA1QUA03'
+	search_for_lat_eles = 'MA1QUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! ! Arm 2 Quads
+
+&tao_var
+	v1_var%name = 'MA2QUA01'
+	search_for_lat_eles = 'MA2QUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MA2QUA02'
+	search_for_lat_eles = 'MA2QUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MA2QUA03'
+	search_for_lat_eles = 'MA2QUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! ! Matching Quadrupole Doublets
+
+&tao_var
+	v1_var%name = 'MAMQUA01'
+	search_for_lat_eles = 'MAMQUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MAMQUA02'
+	search_for_lat_eles = 'MAMQUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MAMQUA03'
+	search_for_lat_eles = 'MAMQUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MAMQUA04'
+	search_for_lat_eles = 'MAMQUA04'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/

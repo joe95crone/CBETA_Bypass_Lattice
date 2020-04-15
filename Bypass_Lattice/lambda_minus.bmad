@@ -1,0 +1,518 @@
+! JC 21/10/19 Bypass Lattice
+! Start of the 4th pass + bypass + end of 4th pass
+
+!###############################################
+!##########FUCK BYPASSES#####################
+!###############################################
+
+! try to re-create the merger section from the linac onwards
+
+! START-UP
+! Starting Twiss parameters at the LA.DEMER.MAR.BEG marker, the marker after the linac pass
+beginning[beta_a] = 13.64461140;
+beginning[beta_b] = 13.48668804;
+beginning[alpha_a] = -0.89813687;
+beginning[alpha_b] = -0.88727971;
+beginning[phi_a] = 493.25094486;
+beginning[phi_b] = 366.80044749;
+beginning[eta_x] = -0.28840819;
+beginning[eta_z] = 57.02369822;
+beginning[etap_x] = -0.04723299;
+
+! Set energy + particle
+beginning[e_tot] = 150E6;
+parameter[particle] = electron;
+
+! Set geometry
+parameter[geometry] = open;
+
+! Set global coordinates
+
+beginning[x_position] = 12.61084;
+beginning[z_position] = 25.33990;
+beginning[theta_position] = -18.84956;
+
+
+ !----------------------------------------------------------------------------------------------------------
+ !! MERGER LINE COMPONENTS
+ 
+! MARKERS
+
+LA.DEMER.MAR.BEG: marker;
+LA.DEMER.MAR.END: marker;
+S1.DEMER.MAR.BEG: marker;
+
+! PATCH TO SET BEAM POSITION
+patch_start:	patch,		x_offset=-0.00000000024, x_pitch=-0.00000000002;
+
+! DRIFTS
+S1.PIP01:		drift,		l=0.465;
+S2.PIP01:		drift,		l=2.5910974E-01;
+
+! DIPOLES
+
+MD1DIP01: 	sbend,		l=7E-2, g_err=-1.4880423E-01, fringe_type=full; 
+MS1DIP01:	sbend,		l=2.1111969E-01, g=2.6842127, g_err=-1.9326844, fringe_type=full, e2 = 5.6669016E-01;
+MS2DIP01:	sbend,		l=1.9413426E-01, g=6.6369636E-01, g_err=-3.1857966E-01, fringe_type=full, e1=6.4423101E-02, e2=6.4423101E-02;
+
+! MATCHES
+
+LA.DEMER.MATCH150:	match,		beta_a0=1, beta_b0=1, beta_a1=1, beta_b1=1, x0=3.6458026E-04, px0=1.0416296E-02, x1=3.6460662E-04, px1=1.0417058E-02, z1=7.8690083E-07;
+S1B1.MATCH150:		match,		beta_a0=1, beta_b0=1, beta_a1=1, beta_b1=1, x0 = 5.4846960E-02, px0=4.1354234E-01, x1=5.4765476E-02, px1=4.1267005E-01, z1=4.1041676E-05;
+S2D01.MATCH150:		match,		beta_a0=1, beta_b0=1, beta_a1=1, beta_b1=1, x0=7.8536980E-02, px0=1.9246143E-01, x1=7.8551853E-02, px1=1.9253090E-01;
+
+! PATCHES
+S2.DEMERGE_PATCH:		patch,		x_pitch=2.9262110E-01, x_offset=4.3139368E-02;
+S4.DEMERGE_PATCH:		patch,		x_pitch=1.9381144E-01, x_offset=7.8566725E-02;
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+!! S4 LINE COMPONENTS
+
+! MARKERS
+S4.MAR.BEG: marker;
+
+! DRIFTS
+S4.PIP01#1:		drift,		l=2.2048357E-01;
+S4.PIP01#2:		drift,		l=3.6810600E-01;
+
+S4.PIP02#1:		drift,		l=2.3477088E-01;
+S4.PIP02#2:		drift,		l=3.1494342E-02;
+S4.PIP02#3:		drift,		l=2.7890000E-02;
+
+S4.PIP03#1:		drift,		l=3.5000000E-02;
+S4.PIP03#2:		drift,		l=4.3843421E-03;
+S4.PIP03#3:		drift,		l=9.3843421E-03;
+S4.PIP03#4:		drift,		l=9.3843421E-03;
+S4.PIP03#5:		drift,		l=3.2712284E-02;
+
+S4.PIP04#1:		drift,		l=2.7859595E-02;
+S4.PIP04#2:		drift,		l=3.4890000E-02;
+
+S4.PIP05#1:		drift,		l=6.2035342E-02;
+S4.PIP05#2:		drift,		l=1.3112485E-01;
+
+S4.PIP06#1:		drift,		l=2.1747860E-02;
+S4.PIP06#2:		drift,		l=2.7145342E-02;
+S4.PIP06#3:		drift,		l= 3.4890000E-02;
+
+! INSTRUMENTS (SCREENS AND BPMS)
+IS4SCR01:		instrum;
+
+IS4BPM01:		instrum;
+IS4BPM02:		instrum;
+IS4BPM03:		instrum;
+
+S4.SLI01:		instrum, l=2.5092246E-01;
+S4.SLI02:		instrum, l=3.6119784E-01;
+
+! DIPOLES
+MS4DIP01:		sbend,		l=3.4754155E-01, g=-6.7792000E-01, fringe_type=basic_bend, e1=6.7000000E-04, e2=6.7000000E-04;
+MS4DIP02:		sbend,		l=1.5728459E-01, g=-1.0672340E+00, fringe_type=full, e1=-8.3929730E-02, e2=-8.3929730E-02;
+MS4DIP03:		sbend,		l=3.5827958E-01, g=1.4435009E+00, fringe_type=full, e1=2.5858845E-01, e2=2.5858845E-01;
+MS4DIP04:		sbend,		l=3.5827958E-01, g=0.6*1.4435009E+00, fringe_type=full, e1=2.5858845E-01, e2=2.5858845E-01;
+! altered MS4DIP04 to have slightly less field ! 0.6 misses everything
+
+! QUADRUPOLES
+! CHANGED ALL FROM NOMINAL
+MS4QUA01:		quadrupole,		l=1.5123132E-01, b1_gradient=-1.0969565E+01, fringe_type=full, FQ1=-8.4454204E-05, FQ2=4.5142804E-06;
+MS4QUA02:		quadrupole,		l=1.5123132E-01, b1_gradient=1.1544477E+01, fringe_type=full, FQ1=-8.4454204E-05, FQ2=4.5142804E-06;
+MS4QUA03:		quadrupole,		l=1.5123132E-01, b1_gradient=-1.4655347E+01, fringe_type=full, FQ1=-8.4454204E-05, FQ2=4.5142804E-06;
+MS4QUA04:		quadrupole,		l=2.4123132E-01, b1_gradient=-9.1956384, fringe_type=full, FQ1=-8.4454204E-05, FQ2=4.5142804E-06;
+MS4QUA05:		quadrupole,		l=1.5123132E-01, b1_gradient=4.5599333, fringe_type=full, FQ1=-8.4454204E-05, FQ2=4.5142804E-06;
+
+! KICKERS
+MS4CRV01:		vkicker,		l=1.4000000E-01;
+MS4CRV02:		vkicker,		l=1.4000000E-01;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+!! 1st VERTICAL DOGLEG COMPONENTS
+
+! MARKERS
+FROM_S4:					marker;
+VERT_DOG_START: 	marker;
+VERT_DOG_END: 		marker;
+TO_ARC: 						marker;
+
+! DIPOLES
+
+bval = 0.46*0.5;
+
+MVDDIP01:	sbend,		l=0.2, b_field=-bval, ref_tilt=3*pi/2, fringe_type=full;
+MVDDIP02:	sbend,		l=0.2, b_field=bval, ref_tilt=3*pi/2, fringe_type=full;
+! vertical dipoles for dogleg
+
+! QUADRUPOLES
+
+MVDQUA01:		quadrupole, 	l=0.15, superimpose, ref=BY.PIP02, ref_origin=beginning, ele_origin=center, offset=0.775, b1_gradient=8.6491394, fringe_type=full;
+MVDQUA02:		quadrupole,  	l=0.15, superimpose, ref=BY.PIP02, ref_origin=beginning, ele_origin=center, offset=1.550, b1_gradient=-5.5393389, fringe_type=full;
+MVDQUA03:		quadrupole,	l=0.15, superimpose, ref=BY.PIP02, ref_origin=beginning, ele_origin=center, offset=2.325, b1_gradient=8.6491394, fringe_type=full; 
+
+! PIPES
+BY.PIP02:		drift, l=3.1;
+
+BY.PIP01:		drift, l=0.4;
+BY.PIP03:		drift, l=0.9;
+
+
+!-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! RHS ARC COMPONENTS
+
+! QUADRUPOLES
+MRHQUA01:		quadrupole, l=0.15, superimpose, ref=BY.PIP03, ref_origin=beginning, ele_origin=center, offset=0.511635, b1_gradient=-1.5664164E-01, fringe_type=full;
+MRHQUA02:		quadrupole, l=0.15, superimpose, ref=RH.PIP01, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=2.7737197, fringe_type=full;
+MRHQUA03:		quadrupole, l=0.15, superimpose, ref=RH.PIP01, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.2286388, fringe_type=full;
+MRHQUA04:		quadrupole, l=0.15, superimpose, ref=RH.PIP02, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=1.3409893, fringe_type=full;
+MRHQUA05:		quadrupole, l=0.15, superimpose, ref=RH.PIP02, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-1.9056760, fringe_type=full;
+MRHQUA06:		quadrupole, l=0.15, superimpose, ref=RH.PIP03, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient= 1.9619236, fringe_type=full;
+MRHQUA07:		quadrupole, l=0.15, superimpose, ref=RH.PIP03, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.0488748, fringe_type=full;
+MRHQUA08:		quadrupole, l=0.15, superimpose, ref=RH.PIP04, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=2.6480894, fringe_type=full;
+MRHQUA09:		quadrupole, l=0.15, superimpose, ref=RH.PIP04, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-6.0745544, fringe_type=full;
+
+! DIPOLES
+rhsb=-0.83673
+MRHDIP01:		sbend, l=0.3, b_field=rhsb, fringe_type=full; 
+MRHDIP02:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+MRHDIP03:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+MRHDIP04:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+MRHDIP05:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+
+! DRIFTS
+rhsa=1.85346; 
+RH.PIP01:		drift, l=rhsa; 
+RH.PIP02:		drift, l=rhsa; 
+RH.PIP03:		drift, l=rhsa; 
+RH.PIP04:		drift, l=rhsa; 
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! HORIZONTAL DOGLEG COMPONENTS
+
+! Drift
+EPSTEIN_WAS_MURDERED:		drift, l=0.1;
+HD.PIP01:		drift, l=0.1;
+HD.PIP02:		drift, l=3.1;
+
+! Dipole
+MHDDIP01:	sbend, l=0.3, b_field=-0.9, fringe_type=full;
+MHDDIP02:	sbend, l=0.3, b_field=0.9, fringe_type=full;
+
+! Quadrupole
+MHDQUA01:		quadrupole, l=0.15, superimpose, ref=HD.PIP02, ref_origin=beginning, ele_origin=center, offset=0.775, b1_gradient=-6.6776930, fringe_type=full;
+MHDQUA02:		quadrupole, l=0.15, superimpose, ref=HD.PIP02, ref_origin=beginning, ele_origin=center, offset=1.55, b1_gradient=5.7473336, fringe_type=full;
+MHDQUA03:		quadrupole, l=0.15, superimpose, ref=HD.PIP02, ref_origin=beginning, ele_origin=center, offset=2.325, b1_gradient=-8.7448052, fringe_type=full;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! VERTICAL UP IP DOGLEG COMPONENTS
+
+! Drift
+VI.PIP01:		drift, l=0.75; ! drift to dogleg 
+VI.PIP02:		drift, l=2.0;
+
+! Dipole
+MVIDIP01:	sbend, l=0.2, b_field=-0.23, ref_tilt=3*pi/2, fringe_type=full;
+MVIDIP02:	sbend, l=0.2, b_field=0.23, ref_tilt=3*pi/2, fringe_type=full;
+
+! Matching Quadrupoles
+MVIQUA01:	quadrupole, l=0.15, superimpose, ref=VI.PIP01, ref_origin=beginning, ele_origin=center, offset=0.25, b1_gradient=9.2996411, fringe_type=full;
+MVIQUA02:	quadrupole, l=0.15, superimpose, ref=VI.PIP01, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=-9.8303002, fringe_type=full;
+
+! Quadrupole
+MVIQUA03:		quadrupole, l=0.15, superimpose, ref=VI.PIP02, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=1.3477732E+01, fringe_type=full;
+MVIQUA04:		quadrupole, l=0.15, superimpose, ref=VI.PIP02, ref_origin=beginning, ele_origin=center, offset=1.0, b1_gradient=-4.8283904, fringe_type=full;
+MVIQUA05:		quadrupole, l=0.15, superimpose, ref=VI.PIP02, ref_origin=beginning, ele_origin=center, offset=1.5, b1_gradient=1.3477732E+01, fringe_type=full;
+
+!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! FINAL FOCUS SECTION COMPONENTS
+
+! Marker
+CAV_CENTER:		marker;
+
+! Instruments
+! Full IP Cavity
+IP_CAVITY#1:		instrum, l=0.25;
+IP_CAVITY#2:		instrum, l=0.25;
+
+! Drifts
+IP.PIP01:		drift, l=1.5;
+IP.PIP02:		drift, l=1.2; 
+
+! Quadrupoles
+MIPQUA01:		quadrupole, l=0.15, superimpose, ref=IP.PIP01, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=-8.3399570, fringe_type=full;
+MIPQUA02:		quadrupole, l=0.15, superimpose, ref=IP.PIP01, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=5.5712482, fringe_type=full;
+MIPQUA03:		quadrupole, l=0.15, superimpose, ref=IP.PIP01, ref_origin=beginning, ele_origin=center, offset=0.9, b1_gradient=7.7156073, fringe_type=full;
+MIPQUA04:		quadrupole, l=0.15, superimpose, ref=IP.PIP01, ref_origin=beginning, ele_origin=center, offset=1.2, b1_gradient=-8.9775371, fringe_type=full;
+
+MIPQUA05:		quadrupole, l=0.15, superimpose, ref=IP.PIP02, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=-7.2142485, fringe_type=full;
+MIPQUA06:		quadrupole, l=0.15, superimpose, ref=IP.PIP02, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=1.4264496E+01, fringe_type=full;
+MIPQUA07:		quadrupole, l=0.15, superimpose, ref=IP.PIP02, ref_origin=beginning, ele_origin=center, offset=0.9, b1_gradient=-9.6271269, fringe_type=full;
+
+!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! VERTICAL DOWN IP DOGLEG COMPONENTS
+
+! Drift
+IV.PIP01:		drift, l=2.0;
+
+! Dipole
+MIVDIP01:	sbend, l=0.2, b_field=0.23, ref_tilt=3*pi/2, fringe_type=full;
+MIVDIP02:	sbend, l=0.2, b_field=-0.23, ref_tilt=3*pi/2, fringe_type=full;
+
+! Quadrupole
+MIVQUA01:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=1.3488715E+01, fringe_type=full;
+MIVQUA02:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=1.0, b1_gradient=-7.3677453, fringe_type=full;
+MIVQUA03:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=1.5, b1_gradient=1.3488699E+01, fringe_type=full;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+!  PATH LENGTH ADJUSTMENT COMPONENTS
+! Total length of straight is 8.2m
+
+! Drifts
+TO_ARM:			drift, l=0.9;
+ARM1:				drift, l=2.9;
+
+ARM2:				drift, l=2.9;
+FROM_ARM:	drift, l=0.9;
+
+Larm=2.9;
+Ldip=0.3;
+
+! Dipoles 
+ang=0.3680698419;
+
+!GFC:	group = {MFCDIP01[b_field]:ang,MFCDIP02[b_field]:-ang,MFCDIP03[b_field]:-ang,MFCDIP04[b_field]:ang,BELLOW[L]:2*Larm*(1-cos(299.8*ang*Ldip/150))}, var={ang};
+
+MFCDIP01:		sbend, l=0.2, b_field=ang, fringe_type=full;
+MFCDIP02:		sbend, l=0.2, b_field=-ang, fringe_type=full;
+MFCDIP03:		sbend, l=0.2, b_field=-ang, fringe_type=full;
+MFCDIP04:		sbend, l=0.2, b_field=ang, fringe_type=full;
+
+! Drift length for path length correction bellow
+BELLOW:			drift, l= 1.8129691;
+! Marker for Bellow centre
+! BEL_CENT:		marker, superimpose, ref=BELLOW, ref_origin=beginning, ele_origin=beginning, offset=BELLOW[l]/2;
+
+! Arm 1 Quadrupoles
+MA1QUA01:		quadrupole, l=0.15, superimpose, ref=ARM1, ref_origin=beginning, ele_origin=center, offset=0.725, b1_gradient=-2.71293279, fringe_type=full; 
+MA1QUA02:		quadrupole, l=0.15, superimpose, ref=ARM1, ref_origin=beginning, ele_origin=center, offset=1.450, b1_gradient=3.51543477, fringe_type=full; 
+MA1QUA03:		quadrupole, l=0.15, superimpose, ref=ARM1, ref_origin=beginning, ele_origin=center, offset=2.175, b1_gradient=-1.78803705, fringe_type=full; 
+
+! Arm 2 Quadrupoles
+MA2QUA01:		quadrupole, l=0.15, superimpose, ref=ARM2, ref_origin=beginning, ele_origin=center, offset=0.725, b1_gradient=-2.31791902E-01, fringe_type=full; 
+MA2QUA02:		quadrupole, l=0.15, superimpose, ref=ARM2, ref_origin=beginning, ele_origin=center, offset=1.450, b1_gradient=3.63900603, fringe_type=full; 
+MA2QUA03:		quadrupole, l=0.15, superimpose, ref=ARM2, ref_origin=beginning, ele_origin=center, offset=2.175, b1_gradient=-3.17304306E-01, fringe_type=full; 
+
+! Matching Quadrupole Doublets
+MAMQUA01:		quadrupole, l=0.15, superimpose, ref=TO_ARM, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=-4.61597333, fringe_type=full;
+MAMQUA02:		quadrupole, l=0.15, superimpose, ref=TO_ARM, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=6.10324398, fringe_type=full; 
+
+MAMQUA03:		quadrupole, l=0.15, superimpose, ref=FROM_ARM, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=1.45804032, fringe_type=full;
+MAMQUA04:		quadrupole, l=0.15, superimpose, ref=FROM_ARM, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=-3.63805228, fringe_type=full;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! STRAIGHT COMPONENTS
+
+! Drift
+ST.PIP01:		drift, l=4.577074;
+
+! Quadrupoles
+MSTQUA01:		quadrupole, l=0.15, superimpose, ref=ST.PIP01, ref_origin=beginning, ele_origin=center, offset=1.1442685, b1_gradient=1.37304127E-01, fringe_type=full;
+MSTQUA02:		quadrupole, l=0.15, superimpose, ref=ST.PIP01, ref_origin=beginning, ele_origin=center, offset=2.288537, b1_gradient=-4.17123651E-01, fringe_type=full;
+MSTQUA03:		quadrupole, l=0.15, superimpose, ref=ST.PIP01, ref_origin=beginning, ele_origin=center, offset=3.4328055, b1_gradient=2.59385162, fringe_type=full;
+
+!----------------------------------------------------------------------------------------------------------------------------------------------
+! LHS ARC COMPONENTS 
+lhsa=0.957625;
+lhsb=1.354553;
+
+! Drifts
+LH.PIP01:		drift, l=lhsb;
+LH.PIP02:		drift, l=lhsb;
+LH.PIP03:		drift, l=lhsb;
+
+! Dipoles
+MLHDIP01:		sbend, l=0.3, b_field=-lhsa;
+MLHDIP02:		sbend, l=0.3, b_field=-lhsa;
+MLHDIP03:		sbend, l=0.3, b_field=-lhsa;
+MLHDIP04:		sbend, l=0.3, b_field=-lhsa;
+
+! Quadrupoles
+MLHQUA01:		quadrupole, l=0.15, superimpose, ref=LH.PIP01, ref_origin=beginning, ele_origin=center, offset=((lhsb-0.3)/4), b1_gradient=-2.32366211, fringe_type=full;
+MLHQUA02:		quadrupole, l=0.15, superimpose, ref=LH.PIP01, ref_origin=beginning, ele_origin=center, offset=3*((lhsb-0.3)/4), b1_gradient=-5.10388404, fringe_type=full;
+MLHQUA03:		quadrupole, l=0.15, superimpose, ref=LH.PIP02, ref_origin=beginning, ele_origin=center, offset=((lhsb-0.3)/4), b1_gradient=-6.21586158, fringe_type=full;
+MLHQUA04:		quadrupole, l=0.15, superimpose, ref=LH.PIP02, ref_origin=beginning, ele_origin=center, offset=3*((lhsb-0.3)/4), b1_gradient=5.66962869, fringe_type=full;
+MLHQUA05:		quadrupole, l=0.15, superimpose, ref=LH.PIP03, ref_origin=beginning, ele_origin=center, offset=((lhsb-0.3)/4), b1_gradient=-3.06936700, fringe_type=full;
+MLHQUA06:		quadrupole, l=0.15, superimpose, ref=LH.PIP03, ref_origin=beginning, ele_origin=center, offset=3*((lhsb-0.3)/4), b1_gradient=-4.52236145, fringe_type=full;
+
+!----------------------------------------------------------------------------------------------------------------------------------------------
+! VERTICAL DOGLEG DOWN COMPONENTS
+
+! DIPOLES
+dvbval = 0.23;
+
+MDVDIP01:	sbend,		l=0.2, b_field=dvbval, ref_tilt=3*pi/2, fringe_type=full;
+MDVDIP02:	sbend,		l=0.2, b_field=-dvbval, ref_tilt=3*pi/2, fringe_type=full;
+! vertical dipoles for dogleg
+
+! QUADRUPOLES
+MDVQUA01:		quadrupole, 	l=0.15, superimpose, ref=ARC.PIP, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=8.91073039, fringe_type=full;
+MDVQUA02:		quadrupole,	l=0.15, superimpose, ref=ARC.PIP, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=-9.83848583, fringe_type=full;
+
+MDVQUA03:		quadrupole, 	l=0.15, superimpose, ref=DV.PIP01, ref_origin=beginning, ele_origin=center, offset=0.775, b1_gradient=8.6478465, fringe_type=full;
+MDVQUA04:		quadrupole,  	l=0.15, superimpose, ref=DV.PIP01, ref_origin=beginning, ele_origin=center, offset=1.550, b1_gradient=-4.7720358, fringe_type=full;
+MDVQUA05:		quadrupole,	l=0.15, superimpose, ref=DV.PIP01, ref_origin=beginning, ele_origin=center, offset=2.325, b1_gradient=8.6478310, fringe_type=full; 
+
+MDVQUA06:		quadrupole,	l=0.15, superimpose, ref=R4.PIP, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=-2.87375583, fringe_type=full; 
+MDVQUA07:		quadrupole,	l=0.15, superimpose, ref=R4.PIP, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=-1.40364869, fringe_type=full; 
+
+! PIPES
+DV.PIP01:		drift, l=3.1;
+ARC.PIP:			drift, l=0.9;
+R4.PIP:			drift, l=0.9;
+
+!-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! R4 to Linac
+
+! MARKERS
+R4.MAR.END:						marker;
+R1.MERGE.MAR.BEG\4:		marker;
+R1.MERGE.MAR.END\4:		marker;
+IN.MERGE.MAR.END\5:		marker;
+LA.MAR.BEG\5:					marker;
+
+! PATCHES
+R4.MERGE_PATCH1:	patch, x_pitch=1.9372617E-01, x_offset=-7.4744510E-02, z_offset=-5.8244611E-13;
+R2.MERGE_PATCH\3:	patch, x_pitch=2.4200349E-01, x_offset=-1.3486018E-02, z_offset=-2.9126357E-13;
+R1B1.PATCH\4:			patch, x_pitch=6.7626445E-03, x_offset=1.4952832E-03;
+MR1DIP99.PATCH\4:	patch, x_pitch=-3.6745353E-02, x_offset=-1.2862321E-03;
+R1.MERGE_PATCH\4:	patch, x_pitch=-2.2505404E-01, x_offset=2.8610364E-02;
+RETURN4.TIME_PATCH:	patch, t_offset=4.7880000E-10;
+
+! MATCHES
+R2D01.MATCH150:		match, beta_a0=1, beta_b0=1, beta_a1=1,beta_b1=1, x0=7.4538764E-02, px0=-1.9243975E-01, x1=7.2908170E-02, px1=-1.9236281E-01;
+R1B1.MATCH150:			match, x0=2.0164523E-02, px0=-3.7225226E-01, x1=2.0426842E-02, px1=-3.7385152E-01,z1=-7.3060257E-06; 
+MR1DIP99.MATCH150:	match, x0=-2.0416031E-02, px0=-1.1081049E-05, x1=-2.0416757E-02, px1=6.2315773E-07, z1=-7.5686448E-07;
+IN.MERGE.MATCH150:	match, x0=1.3083085E-03, px0=1.0344409E-02, x1=1.3046173E-03, px1=1.0315207E-02, z1=5.1401678E-07;
+RETURN4.TIME_MATCH: match, beta_a0=1, beta_b0=1, beta_a1=1, beta_b1=1;
+
+! INSTRUMENTS
+IR4BPM03: 	instrum;
+IR4BPM02:	instrum;
+IR4BPM01:	instrum;
+
+R4.SLI02:		instrum, l=3.6157196E-01;
+R4.SLI01:		instrum, l=2.5097226E-01;
+
+IR4SCR01:	instrum;
+
+! DIPOLES
+MR4DIP04:		sbend, l=3.5841365E-01, b_field=-7.3394009E-01, e1=2.6287368E-01, e2=2.6287368E-01, fringe_type=full;
+MR4DIP03:		sbend, l=3.5841365E-01, b_field=-7.3394009E-01, e1=2.6287368E-01, e2=2.6287368E-01, fringe_type=full;
+MR4DIP02:		sbend, l=1.5731457E-01, b_field=5.7556821E-01, e1=-9.0483152E-02, e2=-9.0483152E-02, fringe_type=full;
+MR4DIP01:		sbend, l=3.4754155E-01, b_field=3.3919269E-01, e1=6.7000000E-04, e2=6.7000000E-04, fringe_type=full;
+
+MR2DIP01\3:	sbend, l=1.9413426E-01, b_field=-3.3207599E-01, b_field_err=1.5939918E-01, e1= 6.4423101E-02, e2= 6.4423101E-02, fringe_type=full;
+MR1DIP01\4:	sbend, l=2.0943951E-01, b_field=-1.2508581, b_field_err=9.0064172E-01, e1=5.2359878E-01, fringe_type=full;
+MR1DIP99\4:	sbend, l=7.0000000E-02, b_field_err=-7.3519591E-02, fringe_type=full;
+MB1DPA02\5:	sbend, l=2.5585623E-01, b_field=5.1196546E-01, b_field_err=-4.9156113E-01, e1=-2.6179939E-01, fringe_type=full;
+
+! QUADRUPOLES
+MR4QUA05:		quadrupole, l=1.5123132E-01, b1_gradient=4.11443648, FQ1=-8.4454204E-05, FQ2=4.5142804E-06, fringe_type=full;
+! Long Quad
+MR4QUA04:		quadrupole, l=2.4123132E-01, b1_gradient=-9.68480146, FQ1=-8.4454204E-05, FQ2=4.5142804E-06, fringe_type=full;
+MR4QUA03:		quadrupole, l=1.5123132E-01, b1_gradient=-1.37366894E+01, FQ1=-8.4454204E-05, FQ2=4.5142804E-06, fringe_type=full;
+MR4QUA02:		quadrupole, l=1.5123132E-01, b1_gradient=1.11963371E+01, FQ1=-8.4454204E-05, FQ2=4.5142804E-06, fringe_type=full;
+MR4QUA01:		quadrupole, l=1.5123132E-01, b1_gradient=-1.01315285E+01, FQ1=-8.4454204E-05, FQ2=4.5142804E-06, fringe_type=full;
+
+! KICKERS
+MR4CRV02:		vkicker, l=1.4000000E-01;
+MR4CRV01:		vkicker, l=1.4000000E-01;
+
+! DRIFTS
+R4.PIP06#1:		drift, l=3.4890000E-02;
+R4.PIP06#2:		drift, l=3.0593342E-02;
+R4.PIP06#3:		drift, l=3.1717391E-02;
+
+R4.PIP05#1:		drift, l=1.2767830E-01;
+R4.PIP05#2:		drift, l=6.5483342E-02;
+
+R4.PIP04#1:		drift, l=3.4890000E-02;
+R4.PIP04#2:		drift, l=2.7808484E-02;
+
+R4.PIP03#1:		drift, l=2.2713596E-02;
+R4.PIP03#2:		drift, l=9.3843421E-03;
+R4.PIP03#3:		drift, l=9.3843421E-03;
+R4.PIP03#4:		drift, l=9.3843421E-03;
+R4.PIP03#5:		drift, l=4.0000000E-02;
+
+R4.PIP02#1:		drift, l=2.7890000E-02;
+R4.PIP02#2:		drift, l=2.6494342E-02;
+R4.PIP02#3:		drift, l=2.4664499E-01;
+
+R4.PIP01#1:		drift, l=3.6617400E-01;
+R4.PIP01#2:		drift, l=2.4245579E-01;
+
+R2.PIP01\3:		drift, l=2.5910974E-01;
+R1.PIP01\4:		drift, l=2.0523965E+00;
+R1.PIP00\4:		drift, l=6.0837267E-01;
+LA.PATH_LENGTH_ADJUST4:		drift, l=0;
+
+! FLOOR SHIFT
+LA.FLOOR_SHIFT4: floor_shift;
+
+R4Linacpt1:	line = (MR4DIP04,R4.PIP06#1,IR4BPM03,R4.PIP06#2,MR4QUA05,R4.PIP06#3,R4.SLI02,R4.PIP05#1,MR4QUA04,R4.PIP05#2,MR4DIP03,R4.PIP04#1,IR4BPM02);
+R4Linacpt2:	line = (R4.PIP04#2,R4.SLI01,R4.PIP03#1,MR4QUA03,R4.PIP03#2,MR4CRV02,R4.PIP03#3, MR4QUA02,R4.PIP03#4,MR4CRV01,R4.PIP03#5,MR4DIP02,R4.PIP02#1);
+R4Linacpt3:	line = (IR4BPM01,R4.PIP02#2,MR4QUA01,R4.PIP02#3,MR4DIP01,R4.PIP01#1,IR4SCR01,R4.PIP01#2,R4.MAR.END,R4.MERGE_PATCH1,R2D01.MATCH150);
+R4Linacpt4:	line = (MR2DIP01\3,R2.PIP01\3,R2.MERGE_PATCH\3,R1.MERGE.MAR.BEG\4,R1B1.PATCH\4,R1B1.MATCH150,MR1DIP01\4,R1.PIP01\4,MR1DIP99.MATCH150);
+R4Linacpt5:	line = (MR1DIP99\4,MR1DIP99.PATCH\4,R1.MERGE.MAR.END\4,R1.MERGE_PATCH\4,IN.MERGE.MATCH150,MB1DPA02\5,IN.MERGE.MAR.END\5);
+R4Linacpt6:	line = (RETURN4.TIME_PATCH,RETURN4.TIME_MATCH, LA.PATH_LENGTH_ADJUST4,LA.FLOOR_SHIFT4,LA.MAR.BEG\5);
+
+!-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+!! LINES FOR MERGER AND S4 (Up to ele 4638) REACHED MS4DIP04! (sub micron differences - scott specifies lattice in more detail)
+
+! Merger
+LA_merge_sec: line = (patch_start,LA.DEMER.MAR.BEG,MD1DIP01,LA.DEMER.MATCH150,LA.DEMER.MAR.END); 
+! from #4591 to 4594 in 4 pass lattice
+S1_to_S4_merge_sec: line = (S1.DEMER.MAR.BEG,S1.PIP01,MS1DIP01,S1B1.MATCH150,S2.DEMERGE_PATCH,S2.PIP01,MS2DIP01,S2D01.MATCH150,S4.DEMERGE_PATCH);
+! from #4595 to 4603 in 4 pass lattice
+
+! S4 Line 
+! Where do we end this?  Full line is #4604-4660, to MS4DIP04 it is #4638
+S4_mod_pt1: line = (S4.MAR.BEG,S4.PIP01#1,IS4SCR01,S4.PIP01#2,MS4DIP01,S4.PIP02#1,MS4QUA01,S4.PIP02#2,IS4BPM01,S4.PIP02#3, MS4DIP02,S4.PIP03#1,MS4CRV01);
+S4_mod_pt2: line = (S4.PIP03#2,MS4QUA02,S4.PIP03#3,MS4CRV02,S4.PIP03#4,MS4QUA03,S4.PIP03#5,S4.SLI01,S4.PIP04#1,IS4BPM02,S4.PIP04#2,MS4DIP03,S4.PIP05#1);
+S4_mod_pt3: line = (MS4QUA04,S4.PIP05#2,S4.SLI02,S4.PIP06#1,MS4QUA05,S4.PIP06#2,IS4BPM03,S4.PIP06#3,MS4DIP04);
+! modified S4 line for start of the bypass (At the moment just building a copy of S4 to cut at any point)
+merge_sec:	line = (LA_merge_sec,S1_to_S4_merge_sec,S4_mod_pt1,S4_mod_pt2,S4_mod_pt3);
+
+! Vertical Dogleg
+vert_dog:	line = (FROM_S4,BY.PIP01,VERT_DOG_START,MVDDIP01,BY.PIP02,MVDDIP02,VERT_DOG_END,BY.PIP03,TO_ARC);
+
+! RHS Arc
+rhs_arc:	line = (MRHDIP01,RH.PIP01,MRHDIP02,RH.PIP02,MRHDIP03,RH.PIP03,MRHDIP04,RH.PIP04,MRHDIP05);
+
+! Horizontal Dogleg
+hor_dog:	line = (EPSTEIN_WAS_MURDERED,HD.PIP01,MHDDIP01,HD.PIP02,MHDDIP02);
+
+! Vertical Dogleg IP Up
+vert_up_dog:				line = (VI.PIP01,MVIDIP01,VI.PIP02,MVIDIP02);
+
+! Interaction Point
+final_focus:	 line = (IP.PIP01,IP_CAVITY#1,CAV_CENTER,IP_CAVITY#2,IP.PIP02);
+
+! Vertical Dogleg IP Down
+vert_down_dog:		line = (MIVDIP01,IV.PIP01,MIVDIP02);
+
+! Path Length Adjustment Chicane
+chic_adj:		line = (TO_ARM,MFCDIP01,ARM1,MFCDIP02,BELLOW,MFCDIP03,ARM2,MFCDIP04,FROM_ARM);
+
+! Straight
+straight:	line = (ST.PIP01);
+
+! LHS Arc
+LHS_arc:		line = (MLHDIP01,LH.PIP01,MLHDIP02,LH.PIP02,MLHDIP03,LH.PIP03,MLHDIP04);
+
+! R4 Dogleg
+vert_dog_R4:		line = (ARC.PIP,MDVDIP01,DV.PIP01,MDVDIP02,R4.PIP);
+
+! R4 to Linac
+R4_Linac:	line = (R4Linacpt1,R4Linacpt2,R4Linacpt3,R4Linacpt4,R4Linacpt5,R4Linacpt6);
+
+! TOTAL BYPASS LINE
+bypass: line = (merge_sec,vert_dog,rhs_arc,hor_dog,vert_up_dog,final_focus,vert_down_dog,chic_adj,straight,LHS_arc,vert_dog_R4,R4_Linac);
+use, bypass;
