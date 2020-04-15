@@ -1,0 +1,38 @@
+ MATCHYMCMATCHFACE1[B1_GRADIENT] =   9.29969955904808E+00   ! Not used in optimizing
+ MATCHYMCMATCHFACE2[B1_GRADIENT] =  -9.83023196166623E+00   ! Not used in optimizing
+ MVUQUA01[B1_GRADIENT] =   1.34777327574025E+01
+ MVUQUA02[B1_GRADIENT] =  -4.82839041097789E+00
+ MVUQUA03[B1_GRADIENT] =   1.34777308950152E+01
+ 
+ end_file
+ 
+ 
+ ! Top 10
+ 
+ Constraints                                    Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ lat_corr.dispersion[1]  eta.b <target>                               END        0.0000E+00   7.3110E-09  5.345E-16
+ lat_corr.dispersion[2]  etap.b <target>                              END        0.0000E+00  -2.3746E-09  5.639E-17
+ MVUQUA03[1]             MVUQUA03[B1_GRADIENT]                        2.52       1.5000E+01   1.3478E+01  0.000E+00
+ MVUQUA02[1]             MVUQUA02[B1_GRADIENT]                        2.02      -1.5000E+01  -4.8284E+00  0.000E+00
+ MVUQUA01[1]             MVUQUA01[B1_GRADIENT]                        1.52       1.5000E+01   1.3478E+01  0.000E+00
+ lat_corr.beta[2]        alpha.a <min>                                END       -7.0000E+00  -6.9657E+00  0.000E+00
+ lat_corr.beta[1]        alpha.b <min>                                END       -2.0000E+00  -1.9350E+00  0.000E+00
+ lat_corr.beta[2]        beta.a <max>                     BEGINNING   END        4.0000E+01   3.1991E+01  0.000E+00  MATCHYMCMATCHFACE2
+ lat_corr.beta[1]        beta.b <max>                     BEGINNING   END        4.0000E+01   1.3739E+01  0.000E+00  VU.PIP01#1
+ Constraints                                    Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ 
+  figure of merit: 5.908889E-16
+ 
+ Constraints                                    Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ lat_corr.dispersion[1]  eta.b <target>                               END        0.0000E+00   7.3110E-09  5.345E-16
+ lat_corr.dispersion[2]  etap.b <target>                              END        0.0000E+00  -2.3746E-09  5.639E-17
+ lat_corr.beta[1]        beta.b <max>                     BEGINNING   END        4.0000E+01   1.3739E+01  0.000E+00  VU.PIP01#1
+ lat_corr.beta[2]        beta.a <max>                     BEGINNING   END        4.0000E+01   3.1991E+01  0.000E+00  MATCHYMCMATCHFACE2
+ lat_corr.beta[1]        alpha.b <min>                                END       -2.0000E+00  -1.9350E+00  0.000E+00
+ lat_corr.beta[2]        alpha.a <min>                                END       -7.0000E+00  -6.9657E+00  0.000E+00
+ MVUQUA01[1]             MVUQUA01[B1_GRADIENT]                        1.52       1.5000E+01   1.3478E+01  0.000E+00
+ MVUQUA02[1]             MVUQUA02[B1_GRADIENT]                        2.02      -1.5000E+01  -4.8284E+00  0.000E+00
+ MVUQUA03[1]             MVUQUA03[B1_GRADIENT]                        2.52       1.5000E+01   1.3478E+01  0.000E+00
+ Constraints                                    Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ 
+  figure of merit: 5.908889E-16

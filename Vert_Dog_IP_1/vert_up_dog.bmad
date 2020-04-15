@@ -1,0 +1,51 @@
+! START-UP
+! Starting Twiss parameters at the start of the 0.9m drift precluding the arc
+beginning[beta_a] = 7.58884557;
+beginning[beta_b] =  11.92563955;
+beginning[alpha_a] = -4.99777941;
+beginning[alpha_b] = -4.99113387;
+beginning[phi_a] =  513.72368403;
+beginning[phi_b] = 376.82645676;
+beginning[eta_x] = 0.00000012;
+beginning[eta_z] = 56.00235362;
+beginning[etap_x] = 0.00000038;
+
+! Set energy + particle
+beginning[e_tot] = 150E6;
+parameter[particle] = electron;
+
+! Set geometry
+parameter[geometry] = open;
+
+! Set global coordinates
+
+beginning[x_position] = 3.93378;
+beginning[y_position] = 0.30298;
+beginning[z_position] = 28.81380;
+beginning[theta_position] = -21.99115;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! VERTICAL IP DOGLEG COMPONENTS
+
+! Drift
+VU.PIP01:		drift, l=0.75; ! drift to dogleg (only 5cm between magnets - is that okay?? probably)
+VU.PIP02:		drift, l=2.0;
+
+! Dipole
+MVUDIP01:	sbend, l=0.2, b_field=-0.23, ref_tilt=3*pi/2, fringe_type=full;
+MVUDIP02:	sbend, l=0.2, b_field=0.23, ref_tilt=3*pi/2, fringe_type=full;
+
+! Matching Quadrupoles
+MatchyMcMatchFace1:	quadrupole, l=0.15, superimpose, ref=VU.PIP01, ref_origin=beginning, ele_origin=center, offset=0.25, b1_gradient=9.2996996, fringe_type=full;
+MatchyMcMatchFace2:	quadrupole, l=0.15, superimpose, ref=VU.PIP01, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=-9.8302320, fringe_type=full;
+
+! Quadrupole
+MVUQUA01:		quadrupole, l=0.15, superimpose, ref=VU.PIP02, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=1.3477733E+01, fringe_type=full;
+MVUQUA02:		quadrupole, l=0.15, superimpose, ref=VU.PIP02, ref_origin=beginning, ele_origin=center, offset=1.0, b1_gradient=-4.8283904, fringe_type=full;
+MVUQUA03:		quadrupole, l=0.15, superimpose, ref=VU.PIP02, ref_origin=beginning, ele_origin=center, offset=1.5, b1_gradient=1.3477731E+01, fringe_type=full;
+
+!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+
+vert_up_dog:				line = (VU.PIP01,MVUDIP01,VU.PIP02,MVUDIP02);
+use, vert_up_dog;
