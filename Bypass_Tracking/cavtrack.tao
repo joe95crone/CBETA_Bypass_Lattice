@@ -1,0 +1,4 @@
+beamon
+place r11 bunch_x_px
+set curve bunch_x_px.g ele_ref_name=cav_center
+beamon
