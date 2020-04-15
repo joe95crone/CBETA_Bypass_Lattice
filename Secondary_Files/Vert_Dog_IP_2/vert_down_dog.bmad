@@ -1,0 +1,49 @@
+! START-UP
+! Starting Twiss parameters at the start of the 0.9m drift precluding the arc
+beginning[beta_a] = 13.43531520;
+beginning[beta_b] =  12.26101994;
+beginning[alpha_a] = -6.47395003;
+beginning[alpha_b] = -6.72428177;
+beginning[phi_a] =  518.50176114;
+beginning[phi_b] = 386.81139971;
+beginning[eta_x] = 0.00000004;
+beginning[eta_y] = -0.00000002;
+beginning[eta_z] = 56.00185359;
+beginning[etap_x] = 0.00000002;
+beginning[etap_y] = -0.00000001;
+
+! Set energy + particle
+beginning[e_tot] = 150E6;
+parameter[particle] = electron;
+
+! Set geometry
+parameter[geometry] = open;
+
+! Set global coordinates
+
+beginning[x_position] = 3.93379;
+beginning[y_position] = 0.50497;
+beginning[z_position] = 22.47281;
+beginning[theta_position] = -21.99115;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+!  VERTICAL DOGLEG DOWN COMPONENTS
+
+! Drift
+IV.PIP01:		drift, l=2.0;
+
+
+! Dipole
+MIVDIP01:	sbend, l=0.2, b_field=0.23, ref_tilt=3*pi/2, fringe_type=full;
+MIVDIP02:	sbend, l=0.2, b_field=-0.23, ref_tilt=3*pi/2, fringe_type=full;
+
+! Quadrupole
+MIVQUA01:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=10, fringe_type=full;
+MIVQUA02:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=1.0, b1_gradient=-1, fringe_type=full;
+MIVQUA03:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=1.5, b1_gradient=10, fringe_type=full;
+
+!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+
+vert_down_dog:		line = (MIVDIP01,IV.PIP01,MIVDIP02);
+use, vert_down_dog;

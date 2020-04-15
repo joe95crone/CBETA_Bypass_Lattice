@@ -1,0 +1,68 @@
+! Lattice from IP point to end of dogleg
+! START-UP
+! Starting Twiss parameters 
+beginning[beta_a] = 0.12260600;
+beginning[beta_b] =  0.12260600;
+beginning[alpha_a] = -0.00000001;
+beginning[alpha_b] = 0.00000004;
+beginning[phi_a] =  516.96849873;
+beginning[phi_b] = 385.33876139;
+beginning[eta_x] = 0.00000001;
+beginning[eta_z] = 56.00183677;
+beginning[etap_x] =  0.00000003;
+beginning[etap_y] = -0.00000002;
+
+! Set energy + particle
+beginning[e_tot] = 150E6;
+parameter[particle] = electron;
+
+! Set geometry
+parameter[geometry] = open;
+
+! Set global coordinates
+
+beginning[x_position] = 3.93379;
+beginning[y_position] = 0.50497;
+beginning[z_position] = 23.92281;
+beginning[theta_position] = -21.99115;
+
+!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! IP HALF COMPONENTS
+
+! Markers
+CAV_CENTER:		marker;
+
+! Instruments
+IP_CAVITY#2:		instrum, l=0.25;
+
+! Drifts
+IP.PIP02:		drift, l=1.2; 
+
+! Quadrupoles
+MIPQUA05:		quadrupole, l=0.15, superimpose, ref=IP.PIP02, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=-7.2142485, fringe_type=full;
+MIPQUA06:		quadrupole, l=0.15, superimpose, ref=IP.PIP02, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=1.4264496E+01, fringe_type=full;
+MIPQUA07:		quadrupole, l=0.15, superimpose, ref=IP.PIP02, ref_origin=beginning, ele_origin=center, offset=0.9, b1_gradient=-9.6271269, fringe_type=full;
+
+!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! VERTICAL DOGLEG COMPONENTS
+
+! Drift
+IV.PIP01:		drift, l=2.0;
+
+! Dipole
+MIVDIP01:	sbend, l=0.2, b_field=0.23, ref_tilt=3*pi/2, fringe_type=full;
+MIVDIP02:	sbend, l=0.2, b_field=-0.23, ref_tilt=3*pi/2, fringe_type=full;
+
+! Quadrupole
+MIVQUA01:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=1.3488715E+01, fringe_type=full;
+MIVQUA02:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=1.0, b1_gradient=-7.3677453, fringe_type=full;
+MIVQUA03:	quadrupole, l=0.15, superimpose, ref=IV.PIP01, ref_origin=beginning, ele_origin=center, offset=1.5, b1_gradient=1.3488699E+01, fringe_type=full;
+
+!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+
+back_IP: 	line = (CAV_CENTER,IP_CAVITY#2,IP.PIP02);
+vert_down_dog:		line = (MIVDIP01,IV.PIP01,MIVDIP02);
+
+lino:		line = (back_IP,vert_down_dog);
+use, lino;
