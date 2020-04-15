@@ -1,0 +1,28 @@
+ MDVQUA03[B1_GRADIENT] =   8.64829202512339E+00
+ MDVQUA04[B1_GRADIENT] =  -5.03807891065839E+00
+ MDVQUA05[B1_GRADIENT] =   8.64828418832148E+00
+ 
+ end_file
+ 
+ 
+ ! Top 10
+ 
+ Constraints                         Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ lat_corr[1]  eta.b <target>                               END        0.0000E+00  -5.3898E-18  2.905E-20
+ lat_corr[2]  etap.b <target>                              END        0.0000E+00  -5.7597E-20  3.317E-24
+ MDVQUA05[1]  MDVQUA05[B1_GRADIENT]                        3.50       1.5000E+01   8.6483E+00  0.000E+00
+ MDVQUA04[1]  MDVQUA04[B1_GRADIENT]                        2.73      -1.5000E+01  -5.0381E+00  0.000E+00
+ MDVQUA03[1]  MDVQUA03[B1_GRADIENT]                        1.95       1.5000E+01   8.6483E+00  0.000E+00
+ Constraints                         Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ 
+  figure of merit: 2.905360E-20
+ 
+ Constraints                         Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ lat_corr[1]  eta.b <target>                               END        0.0000E+00  -5.3898E-18  2.905E-20
+ lat_corr[2]  etap.b <target>                              END        0.0000E+00  -5.7597E-20  3.317E-24
+ MDVQUA03[1]  MDVQUA03[B1_GRADIENT]                        1.95       1.5000E+01   8.6483E+00  0.000E+00
+ MDVQUA04[1]  MDVQUA04[B1_GRADIENT]                        2.73      -1.5000E+01  -5.0381E+00  0.000E+00
+ MDVQUA05[1]  MDVQUA05[B1_GRADIENT]                        3.50       1.5000E+01   8.6483E+00  0.000E+00
+ Constraints                         Ref_Ele    Start_Ele   Ele/S    Meas-or-Lim    Model       Merit      Max_Loc
+ 
+  figure of merit: 2.905360E-20

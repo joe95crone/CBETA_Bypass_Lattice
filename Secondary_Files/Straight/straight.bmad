@@ -1,0 +1,46 @@
+! START-UP
+! Starting Twiss parameters at the start of the 0.9m drift precluding the arc
+beginning[beta_a] = 1.82723654;
+beginning[beta_b] =  10.46190260;
+beginning[alpha_a] = -2.00184894;
+beginning[alpha_b] = 0.13897230;
+beginning[phi_a] =  522.82131419;
+beginning[phi_b] =  395.27826390;
+beginning[eta_x] = 0.00000011;
+beginning[eta_y] =  0.00000030;
+beginning[eta_z] = 56.00141799;
+beginning[etap_x] = 0.00000002;
+beginning[etap_y] = 0.00000005;
+
+! Set energy + particle
+beginning[e_tot] = 150E6;
+parameter[particle] = electron;
+
+! Set geometry
+parameter[geometry] = open;
+
+! Set global coordinates
+
+beginning[x_position] = 3.93381;
+beginning[y_position] = 0.30298;
+beginning[z_position] = 11.48182;
+beginning[theta_position] = -21.99115;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! STRAIGHT COMPONENTS
+
+! Drift
+ST.PIP01:		drift, l=3.19895;
+
+! Quadrupoles
+MSTQUA01:		quadrupole, l=0.15, superimpose, ref=ST.PIP01, ref_origin=beginning, ele_origin=center, offset=0.7997375, b1_gradient=4.9878311E-01, fringe_type=full;
+MSTQUA02:		quadrupole, l=0.15, superimpose, ref=ST.PIP01, ref_origin=beginning, ele_origin=center, offset=1.599475, b1_gradient=-2.2149869, fringe_type=full;
+MSTQUA03:		quadrupole, l=0.15, superimpose, ref=ST.PIP01, ref_origin=beginning, ele_origin=center, offset=2.3992125, b1_gradient=1.2397822, fringe_type=full;
+
+!----------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+
+
+straight:	line = (ST.PIP01);
+
+use, straight;

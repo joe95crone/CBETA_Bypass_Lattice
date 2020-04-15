@@ -1,0 +1,132 @@
+! START UP
+! Starting Twiss parameters at the start of the 0.9m drift precluding the arc
+beginning[beta_a] = 11.47047134;
+beginning[beta_b] =  0.96525744;
+beginning[alpha_a] = -6.55137045;
+beginning[alpha_b] = -2.62725833;
+beginning[phi_a] =  501.01905220;
+beginning[phi_b] = 374.53108632;
+beginning[eta_x] = -0.00833771;
+beginning[eta_z] = 57.02997400;
+beginning[etap_x] = 0.00916467;
+
+! Set energy + particle
+beginning[e_tot] = 150E6;
+parameter[particle] = electron;
+
+! Set geometry
+parameter[geometry] = open;
+
+! Set global coordinates
+
+beginning[x_position] = 9.77940;
+beginning[y_position] = 0.30298;
+beginning[z_position] = 33.83304;
+beginning[theta_position] = -19.48268;
+
+!-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! RHS ARC 
+
+! Drift if starting from the dogleg end
+BY.PIP03:		drift, l=0.9;
+! Potential QUADRUPOLES
+!MysteryQuad:	quadrupole, l=0.15, superimpose, ref=BY.PIP03, ref_origin=beginning, ele_origin=center, offset=0.45, b1_gradient=0, fringe_type=full;
+
+! QUADRUPOLES (1Q, Middle of drift)
+! MACQUA01:		quadrupole, l=0.15, superimpose, ref=ARC.PIP01, ref_origin=beginning, ele_origin=center, offset=0.92673, b1_gradient=-5, fringe_type=full;
+! MACQUA02:		quadrupole, l=0.15, superimpose, ref=ARC.PIP02, ref_origin=beginning, ele_origin=center, offset=0.92673, b1_gradient=5, fringe_type=full;
+! MACQUA03:		quadrupole, l=0.15, superimpose, ref=ARC.PIP03, ref_origin=beginning, ele_origin=center, offset=0.92673, b1_gradient=-5, fringe_type=full;
+! MACQUA04:		quadrupole, l=0.15, superimpose, ref=ARC.PIP04, ref_origin=beginning, ele_origin=center, offset=0.92673, b1_gradient=5, fringe_type=full;
+
+! QUADRUPOLES (2Q, true FODO)
+! MysQuad:			quadrupole, l=0.15, superimpose, ref=BY.PIP03, ref_origin=beginning, ele_origin=center, offset=0.511635, b1_gradient=5.1928669E-01, fringe_type=full;
+! MACQUA01:		quadrupole, l=0.15, superimpose, ref=ARC.PIP01, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=2.2269093, fringe_type=full;
+! MACQUA02:		quadrupole, l=0.15, superimpose, ref=ARC.PIP01, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.3189106, fringe_type=full;
+! MACQUA03:		quadrupole, l=0.15, superimpose, ref=ARC.PIP02, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=1.9651457, fringe_type=full;
+! MACQUA04:		quadrupole, l=0.15, superimpose, ref=ARC.PIP02, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.2546406, fringe_type=full;
+! MACQUA05:		quadrupole, l=0.15, superimpose, ref=ARC.PIP03, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient= 2.0684955, fringe_type=full;
+! MACQUA06:		quadrupole, l=0.15, superimpose, ref=ARC.PIP03, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-1.9726728, fringe_type=full;
+! MACQUA07:		quadrupole, l=0.15, superimpose, ref=ARC.PIP04, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=2.0134848, fringe_type=full;
+! MACQUA08:		quadrupole, l=0.15, superimpose, ref=ARC.PIP04, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.0165561, fringe_type=full;
+
+! TEST
+MACQUA01:			quadrupole, l=0.15, superimpose, ref=BY.PIP03, ref_origin=beginning, ele_origin=center, offset=0.511635, b1_gradient=-2.1, fringe_type=full;
+MACQUA02:		quadrupole, l=0.15, superimpose, ref=ARC.PIP01, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=2.1, fringe_type=full;
+MACQUA03:		quadrupole, l=0.15, superimpose, ref=ARC.PIP01, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.1, fringe_type=full;
+MACQUA04:		quadrupole, l=0.15, superimpose, ref=ARC.PIP02, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=2.1, fringe_type=full;
+MACQUA05:		quadrupole, l=0.15, superimpose, ref=ARC.PIP02, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.1, fringe_type=full;
+MACQUA06:		quadrupole, l=0.15, superimpose, ref=ARC.PIP03, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient= 2.1, fringe_type=full;
+MACQUA07:		quadrupole, l=0.15, superimpose, ref=ARC.PIP03, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.1, fringe_type=full;
+MACQUA08:		quadrupole, l=0.15, superimpose, ref=ARC.PIP04, ref_origin=beginning, ele_origin=center, offset=0.388365, b1_gradient=2.1, fringe_type=full;
+MACQUA09:		quadrupole, l=0.15, superimpose, ref=ARC.PIP04, ref_origin=beginning, ele_origin=center, offset=1.465095, b1_gradient=-2.1, fringe_type=full;
+
+! DIPOLES
+rhsb=-0.83673;
+MACDIP01:		sbend, l=0.3, b_field=rhsb, fringe_type=full; 
+MACDIP02:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+MACDIP03:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+MACDIP04:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+MACDIP05:		sbend, l=0.3, b_field=rhsb, fringe_type=full;
+
+! DRIFTS
+rhsa=1.85346; 
+ARC.PIP01:		drift, l=rhsa; 
+ARC.PIP02:		drift, l=rhsa; 
+ARC.PIP03:		drift, l=rhsa; 
+ARC.PIP04:		drift, l=rhsa; 
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! HORIZONTAL DOGLEG COMPONENTS
+
+! Marker
+ARC2STRAIGHT: marker;
+
+! Drift
+HD.PIP01:		drift, l=0.1;
+HD.PIP02:		drift, l=3.1;
+
+! AS.PIP01#3:		drift, l=0.1; this was previously at the end, just an empty dift 
+
+
+! Dipole
+MHDDIP01:	sbend, l=0.3, b_field=-0.9, fringe_type=full;
+MHDDIP02:	sbend, l=0.3, b_field=0.9, fringe_type=full;
+
+! Quadrupole
+MHDQUA01:		quadrupole, l=0.15, superimpose, ref=HD.PIP02, ref_origin=beginning, ele_origin=center, offset=0.775, b1_gradient=-7.5503276, fringe_type=full;
+MHDQUA02:		quadrupole, l=0.15, superimpose, ref=HD.PIP02, ref_origin=beginning, ele_origin=center, offset=1.55, b1_gradient=4.1557849, fringe_type=full;
+MHDQUA03:		quadrupole, l=0.15, superimpose, ref=HD.PIP02, ref_origin=beginning, ele_origin=center, offset=2.325, b1_gradient=-8.8009243, fringe_type=full;
+
+!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! VERTICAL DOGELEG COMPONENTS
+
+! Drift
+VU.PIP01:		drift, l=0.1; ! drift to dogleg
+VU.PIP02:		drift, l=2.0;
+
+! Dipole
+MVUDIP01:	sbend, l=0.2, b_field=-0.23, ref_tilt=3*pi/2, fringe_type=full;
+MVUDIP02:	sbend, l=0.2, b_field=0.23, ref_tilt=3*pi/2, fringe_type=full;
+
+! Quadrupole
+MVUQUA01:		quadrupole, l=0.15, superimpose, ref=VU.PIP02, ref_origin=beginning, ele_origin=center, offset=0.5, b1_gradient=1.3459769E+01, fringe_type=full;
+MVUQUA02:		quadrupole, l=0.15, superimpose, ref=VU.PIP02, ref_origin=beginning, ele_origin=center, offset=1.0, b1_gradient=-8.3131915E-01, fringe_type=full;
+MVUQUA03:		quadrupole, l=0.15, superimpose, ref=VU.PIP02, ref_origin=beginning, ele_origin=center, offset=1.5, b1_gradient=1.3460621E+01, fringe_type=full;
+
+!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+
+vert_up_dog:		 line = (VU.PIP01,MVUDIP01,VU.PIP02,MVUDIP02);
+
+!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+
+hor_dog:			line = (ARC2STRAIGHT, HD.PIP01,MHDDIP01,HD.PIP02,MHDDIP02);
+
+!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+PIPEY_FELLA:		drift, l=0.1;
+
+rhs_arc:	line = (BY.PIP03,MACDIP01,ARC.PIP01,MACDIP02,ARC.PIP02,MACDIP03,ARC.PIP03,MACDIP04,ARC.PIP04,MACDIP05); 
+lino:		line = (rhs_arc,PIPEY_FELLA,hor_dog,vert_up_dog);
+use, lino;

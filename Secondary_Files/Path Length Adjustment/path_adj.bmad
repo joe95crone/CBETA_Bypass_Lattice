@@ -1,0 +1,74 @@
+! START-UP
+! Starting Twiss parameters at the start of the 0.9m drift precluding the arc
+beginning[beta_a] = 7.02685475;
+beginning[beta_b] =  0.37324219;
+beginning[alpha_a] = -6.99968582;
+beginning[alpha_b] = -1.49999405;
+beginning[phi_a] =   519.88599196;
+beginning[phi_b] =  394.29817030;
+beginning[eta_x] = -0.00000006;
+beginning[eta_y] = -0.00000006;
+beginning[eta_z] = 56.00131819;
+beginning[etap_x] = -0.00000007;
+beginning[etap_y] = -0.00000006;
+
+! Set energy + particle
+beginning[e_tot] = 150E6;
+parameter[particle] = electron;
+
+! Set geometry
+parameter[geometry] = open;
+
+! Set global coordinates
+
+beginning[x_position] = 3.93380;
+beginning[y_position] = 0.30298;
+beginning[z_position] = 20.08182;
+beginning[theta_position] = -21.99115;
+
+!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+!  PATH LENGTH ADJUSTMENT COMPONENTS
+! Total length of straight is 8.2m
+
+! Drifts
+TO_ARM:			drift, l=0.9;
+ARM1:				drift, l=2.9;
+
+ARM2:				drift, l=2.9;
+FROM_ARM:	drift, l=0.9;
+
+! Dipoles
+ang=0;
+
+MFCDIP01:		sbend, l=0.2, b_field=ang, fringe_type=full;
+MFCDIP02:		sbend, l=0.2, b_field=-ang, fringe_type=full;
+MFCDIP03:		sbend, l=0.2, b_field=-ang, fringe_type=full;
+MFCDIP04:		sbend, l=0.2, b_field=ang, fringe_type=full;
+
+! Drift length for path length correction bellow
+BELLOW:			drift, l=(0.2+(2*ARM1[l]*(1-cos(ang))));
+! Marker for Bellow centre
+BEL_CENT:		marker, superimpose, ref=BELLOW, ref_origin=beginning, ele_origin=beginning, offset=BELLOW[l]/2;
+
+! Arm 1 Quadrupoles
+MA1QUA01:		quadrupole, l=0.15, superimpose, ref=ARM1, ref_origin=beginning, ele_origin=center, offset=0.725, b1_gradient=-2.7024456, fringe_type=full; 
+MA1QUA02:		quadrupole, l=0.15, superimpose, ref=ARM1, ref_origin=beginning, ele_origin=center, offset=1.450, b1_gradient=3.1149095, fringe_type=full; 
+MA1QUA03:		quadrupole, l=0.15, superimpose, ref=ARM1, ref_origin=beginning, ele_origin=center, offset=2.175, b1_gradient=-1.3402752, fringe_type=full; 
+
+! Arm 2 Quadrupoles
+MA2QUA01:		quadrupole, l=0.15, superimpose, ref=ARM2, ref_origin=beginning, ele_origin=center, offset=0.725, b1_gradient=-1.7137637, fringe_type=full; 
+MA2QUA02:		quadrupole, l=0.15, superimpose, ref=ARM2, ref_origin=beginning, ele_origin=center, offset=1.450, b1_gradient=2.3764387, fringe_type=full; 
+MA2QUA03:		quadrupole, l=0.15, superimpose, ref=ARM2, ref_origin=beginning, ele_origin=center, offset=2.175, b1_gradient=-1.9035609, fringe_type=full; 
+
+! Matching Quadrupole Doublets
+MAMQUA01:		quadrupole, l=0.15, superimpose, ref=TO_ARM, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=-5.1619731, fringe_type=full;
+MAMQUA02:		quadrupole, l=0.15, superimpose, ref=TO_ARM, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=5.7265596, fringe_type=full; 
+
+MAMQUA03:		quadrupole, l=0.15, superimpose, ref=FROM_ARM, ref_origin=beginning, ele_origin=center, offset=0.3, b1_gradient=2.1096807, fringe_type=full;
+MAMQUA04:		quadrupole, l=0.15, superimpose, ref=FROM_ARM, ref_origin=beginning, ele_origin=center, offset=0.6, b1_gradient=-2.0361728, fringe_type=full;
+
+!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+! LINE
+
+chic_adj:		line = (TO_ARM,MFCDIP01,ARM1,MFCDIP02,BELLOW,MFCDIP03,ARM2,MFCDIP04,FROM_ARM);
+use, chic_adj;
