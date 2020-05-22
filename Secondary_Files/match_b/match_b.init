@@ -1,0 +1,211 @@
+! Optimization for beta* = 0.126976m
+
+&tao_start
+		building_wall_file = 'building_wall.init'
+		startup_file = 'bypass.tao'
+		!plot_file = 'floor_plan.init'
+/
+
+&tao_design_lattice
+		n_universes = 1
+		design_lattice(1)%file = "match_b.bmad"
+/
+
+! FULL CONSTRAINTS R56 + MATCH INTO LINAC
+
+! &tao_d2_data
+  ! d2_data%name = 'lat_corr'
+  ! n_d1_data = 5
+! /
+
+! &tao_d1_data
+  ! ix_d1_data = 1
+  ! d1_data%name = 'dispersion_x'
+  ! datum(1) =  'eta.a'    '' '' 'END'   'target'     0  1e1
+  ! datum(2) =  'etap.a'    '' '' 'END'   'target'     0  1e1
+! /
+
+! &tao_d1_data
+  ! ix_d1_data = 2
+  ! d1_data%name = 'beta_end'
+  ! datum(1) =  'beta.a'    '' '' 'END'   'target'     8.138  1e1
+  ! datum(2) =  'beta.b'    '' '' 'END'   'target'     8.104  1e1
+! /
+
+! &tao_d1_data
+  ! ix_d1_data = 3
+  ! d1_data%name = 'alpha_end'
+  ! datum(1) =  'alpha.a'    '' '' 'END'   'target'     0.184  1e1
+  ! datum(2) =  'alpha.b'    '' '' 'END'   'target'    -0.104  1e1
+! /
+
+! &tao_d1_data
+  ! ix_d1_data = 4
+  ! d1_data%name = 'beta_end'
+  ! datum(1) =  'beta.a'    '' 'MSTQUA01' 'END'   'max'     100  1e1
+  ! datum(2) =  'beta.b'    '' 'MSTQUA01' 'END'   'max'     100  1e1
+! /
+
+! &tao_d1_data
+  ! ix_d1_data = 5
+  ! d1_data%name = 'r56'
+  ! datum(1) =  'r.56'     '' '' 'END'   'target'     0     1e1  
+! /
+
+! FINAL FOCUS CONSTRAINTS
+
+&tao_d2_data
+  d2_data%name = 'lat_corr'
+  n_d1_data = 3
+/
+
+&tao_d1_data
+  ix_d1_data = 1
+  d1_data%name = 'alpha'
+  datum(1) =  'alpha.a'    '' '' 'CAV_CENTER'   'target'     0  1e1
+  datum(2) =  'alpha.b'    '' '' 'CAV_CENTER'   'target'     0  1e1
+/
+
+&tao_d1_data
+  ix_d1_data = 2
+  d1_data%name = 'beta'
+  datum(1) =  'beta.a'    '' '' 'CAV_CENTER'   'target'     0.01  1e1
+  datum(2) =  'beta.b'    '' '' 'CAV_CENTER'   'target'     0.01  1e1
+/
+
+&tao_d1_data
+  ix_d1_data = 3
+  d1_data%name = 'dispersion'
+  datum(1) =  'eta.b'    '' '' 'MVIDIP02'   'target'     0  1e1
+  datum(2) =  'etap.b'    '' '' 'MVIDIP02'   'target'     0  1e1
+/
+
+
+
+! FINAL FOCUS VARIABLES
+
+&tao_var
+	v1_var%name = 'MIPQUA01'
+	search_for_lat_eles = 'MIPQUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -30 !-15
+	default_high_lim = 30 !15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MIPQUA02'
+	search_for_lat_eles = 'MIPQUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -30 !-15
+	default_high_lim = 30 !15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MIPQUA03'
+	search_for_lat_eles = 'MIPQUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -30 !-15
+	default_high_lim = 30 !15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MIPQUA04'
+	search_for_lat_eles = 'MIPQUA04'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -30 !-15
+	default_high_lim = 30 !15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+! VERTICAL DOGLEG VARIABLES
+
+&tao_var
+	v1_var%name = 'MVIQUA01'
+	search_for_lat_eles = 'MVIQUA01'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+&tao_var
+	v1_var%name = 'MVIQUA02'
+	search_for_lat_eles = 'MVIQUA02'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+&tao_var
+	v1_var%name = 'MVIQUA03'
+	search_for_lat_eles = 'MVIQUA03'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MVIQUA04'
+	search_for_lat_eles = 'MVIQUA04'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/
+
+&tao_var
+	v1_var%name = 'MVIQUA05'
+	search_for_lat_eles = 'MVIQUA05'
+	default_step = 1e-4
+	default_attribute = 'b1_gradient'
+	default_merit_type = 'limit'
+	default_low_lim = -15
+	default_high_lim = 15
+	default_weight = 1
+  ix_min_var = 1
+  default_key_delta = 1e-2
+  default_key_bound = T
+/

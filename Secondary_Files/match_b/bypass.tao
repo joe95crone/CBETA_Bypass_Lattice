@@ -1,0 +1,5 @@
+! JC bypass.tao file
+
+alias optlm run lm
+set global n_opti_loops = 100
+alias optde run de
