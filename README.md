@@ -10,3 +10,9 @@ Tao tracking code of the nominal bypass is also included.
 Sub-files used to work on the individual sections are also included.
 
 *The Mark I attempt at this has thankfully been confined to history*
+
+__Changelog__
+
+The FINAL folder has been added. This includes the lattices of the 0.5% BW case for the updated beta function and the 0.01m beta function case. The hdf5 tracking data for these cases is also included. 
+
+The match_b file has been added to the secondary files. It has the two step optimisation used for the optimising of beta at the IP and correction of the subsequent optics down the line.
