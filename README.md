@@ -16,3 +16,5 @@ __Changelog__
 The FINAL folder has been added. This includes the lattices of the 0.5% BW case for the updated beta function and the 0.01m beta function case. The hdf5 tracking data for these cases is also included. 
 
 The match_b file has been added to the secondary files. It has the two step optimisation used for the optimising of beta at the IP and correction of the subsequent optics down the line.
+
+The final tracking data for 20k particles is in the tracking folder. This is for both the 0.01m beta function case and the 0.5% bandwidth case.
